@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,
+  IconDeviceTv,
   IconUserBolt,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -11,7 +12,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/app/lib/utils";
 import { useRouter } from "next/navigation";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+import { LogoutLink, useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
 interface LayoutProps {
   children: ReactNode;
@@ -20,11 +21,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const { user, isAuthenticated, isLoading } = useKindeAuth();
+  const { user, isAuthenticated, isLoading } = useKindeAuth(); // Added logout function
 
   const links = [
     {
-      label: "Discover",
+      label: "Dashboard",
       href: "/dashboard",
       icon: (
         <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
@@ -38,10 +39,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       ),
     },
     {
-      label: "Logout",
-      href: "/login",
+      label: "Stream",
+      href: "/stream",
       icon: (
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconDeviceTv className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
   ];
@@ -66,10 +67,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div>
             <SidebarLink
               link={{
+                //@ts-ignore
                 label: user ? user.given_name : "Loading...",
                 href: "/dashboard/profile",
                 icon: (
                   <Image
+                  //@ts-ignore
                     src={user ? user?.picture : "https://github.com/shadcn.png"}
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
@@ -79,6 +82,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 ),
               }}
             />
+
+            <LogoutLink className="flex items-center gap-2 text-neutral-700 dark:text-neutral-200 p-2 mt-4 bg-gray-200 dark:bg-neutral-700 rounded-lg hover:bg-gray-300 dark:hover:bg-neutral-600">
+              <IconArrowLeft className="h-5 w-5 flex-shrink-0" />Log out</LogoutLink>
           </div>
         </SidebarBody>
       </Sidebar>

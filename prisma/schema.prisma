@@ -14,12 +14,22 @@ datasource db {
 }
 
 model User {
-  id            Int    @id @default(autoincrement())
-  kindeId       String @unique
-  email         String @unique
+  id            String  @id @default(uuid())
+  kindeId       String  @unique
+  email         String  @unique
   firstName     String
   lastName      String
   walletAddress String? @unique
-  ytHandle      String? @unique
   channelId     String? @unique
+  ytHandle      String? @unique
+  chats         Chat[]
+}
+
+model Chat {
+  id       String @id @default(uuid())
+  name     String
+  message  String
+  amount   Int
+  ytHandle String
+  author   User   @relation(fields: [ytHandle], references: [ytHandle])
 }

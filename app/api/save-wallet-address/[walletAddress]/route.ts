@@ -29,6 +29,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     }
     catch(e){
+        console.log(e);
         throw new Error("Error While Updating Wallet Address" + res);
     }
     

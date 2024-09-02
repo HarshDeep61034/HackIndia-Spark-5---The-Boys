@@ -23,11 +23,11 @@ export default function () {
     const { user, isAuthenticated, isLoading } = useKindeAuth();
     const router = useRouter();
 
-    useEffect(()=>{
-        if(!isAuthenticated && !isLoading){
-            router.push("/auth");
-        }
-    },[user, isLoading]);
+    // useEffect(()=>{
+    //     if(!isAuthenticated && !isLoading){
+    //         router.push("/auth");
+    //     }
+    // },[user, isLoading]);
 
     async function fetchBalance(address: string) {
         try {
