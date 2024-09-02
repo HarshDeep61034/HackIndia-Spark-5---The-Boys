@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.14.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.3.31",
+    "next": "14.2.7",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
@@ -16,7 +20,8 @@
     "@solana/web3.js": "^1.95.3",
     "next": "14.2.7",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "next": "14.2.7"
   },
   "devDependencies": {
     "@types/node": "^20",
