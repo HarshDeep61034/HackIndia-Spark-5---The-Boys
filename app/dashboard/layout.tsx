@@ -11,30 +11,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/app/lib/utils";
 import { useRouter } from "next/navigation";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [user, setUser] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
-//   async function getUser() {
-//     try {
-//       const response = await account.getSession('current');
-//       const userResponse = await account.get(); // Fetch the user details
-//       setUser(userResponse);
-//       console.log(userResponse);
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   }
-
-//   useEffect(() => {
-//     getUser();
-//   }, []);
+  const { user, isAuthenticated, isLoading } = useKindeAuth();
 
   const links = [
     {
@@ -80,11 +66,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div>
             <SidebarLink
               link={{
-                label: user ? user.name : "Loading...",
+                label: user ? user.given_name : "Loading...",
                 href: "/dashboard/profile",
                 icon: (
                   <Image
-                    src="https://github.com/shadcn.png"
+                    src={user ? user?.picture : "https://github.com/shadcn.png"}
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}
