@@ -4,7 +4,6 @@ export default function () {
     return (
         <main>
             <h1>Hi there</h1>
-            <SidebarDemo />
         </main>
     )
 }
