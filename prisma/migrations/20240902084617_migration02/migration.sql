@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "walletAddress" DROP NOT NULL,
+ALTER COLUMN "ytHandle" DROP NOT NULL,
+ALTER COLUMN "channelId" DROP NOT NULL;
