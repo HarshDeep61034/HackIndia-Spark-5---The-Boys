@@ -5,7 +5,7 @@ import { User, DollarSign } from 'lucide-react';
 
 const First = ({ username, message, amount }:any) => {
   return (
-    <Card className={`w-full max-w-md mx-auto  border-l-4 border-purple-500`}>
+    <Card className={`w-full max-w-md m-10 border-l-4 border-purple-500`}>
       <CardContent className="p-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center">

@@ -9,11 +9,14 @@ import Chart from "../components/Chart";
 import ThemeToggleButton from "../components/ThemeToggleButton";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import {walletState} from "@/app/store/state"
+
 const connection = new Connection('https://api.devnet.solana.com');
 
 export default function () {
     const { publicKey, connected } = useWallet();
-    const [walletAddress, setWalletAddress] = useState("");
+    const [walletAddress, setWalletAddress] = useRecoilState(walletState);
     const [loading, setLoading] = useState(false);
     const [toastId, setToastId] = useState("");
     const [balance, setBalance] = useState<number | null>(null);

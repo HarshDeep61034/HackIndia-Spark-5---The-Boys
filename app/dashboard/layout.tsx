@@ -99,7 +99,7 @@ const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium text-black dark:text-white whitespace-pre"
       >
-        EVENTX
+        CHAT_ON_STEROIDS
       </motion.span>
     </Link>
   );
