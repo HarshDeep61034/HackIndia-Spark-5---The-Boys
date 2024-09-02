@@ -7,6 +7,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Connection, PublicKey } from '@solana/web3.js';
 import Chart from "../components/Chart";
 import ThemeToggleButton from "../components/ThemeToggleButton";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+import { useRouter } from "next/navigation";
 const connection = new Connection('https://api.devnet.solana.com');
 
 export default function () {
@@ -15,6 +17,14 @@ export default function () {
     const [loading, setLoading] = useState(false);
     const [toastId, setToastId] = useState("");
     const [balance, setBalance] = useState<number | null>(null);
+    const { user, isAuthenticated, isLoading } = useKindeAuth();
+    const router = useRouter();
+
+    useEffect(()=>{
+        if(!isAuthenticated && !isLoading){
+            router.push("/auth");
+        }
+    },[user, isLoading]);
 
     async function fetchBalance(address: string) {
         try {
@@ -67,7 +77,9 @@ export default function () {
             <Toaster />
             <div className="h-10 p-4 w-100% flex justify-end"><ThemeToggleButton /> <WalletMultiButton style={{}} /></div>
             {loading ? "Updating Wallet Address..." : ""}
-            <h1 className="text-3xl font-semibold">Hi there, Harsh</h1> <h2 className="text-2xl font-medium">Your Current Balance: {balance !== null ? balance.toFixed(2) + " SOL" : "Loading..."}</h2>
+
+            <h1 className="text-3xl font-semibold">Hi there, {user?.given_name}</h1>         {walletAddress && <div> <h2 className="text-2xl font-medium">Your Current Balance: {balance !== null ? balance.toFixed(2) + " SOL" : "Loading..."}</h2>        </div>}
+
             <Chart walletAddress={walletAddress} />
         </main>
     )
